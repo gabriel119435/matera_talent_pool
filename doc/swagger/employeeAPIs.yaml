@@ -1,0 +1,172 @@
+swagger: '2.0'
+info:
+  description: |+
+    This document describes employeeResponses apis using CRUD functionalities
+  version: "1.0"
+  title: "matera_talent_pool"
+host: "localhost:8081"
+securityDefinitions:
+  basicAuth:
+    type: basic
+    description: |+
+      username and password written in application.yml
+security:
+  - basicAuth: []
+paths:
+  /employee:
+    get:
+      tags:
+      - "employee"
+      summary: "find all active employeeResponses"
+      description: |+
+        returns a list of active employeeResponses
+        \
+        READ authority
+      produces:
+        - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/employeeResponseList"
+    post:
+      tags:
+      - "employee"
+      summary: "register new employee"
+      description: |+
+        returns employee with id
+        \
+        WRITE authority
+      parameters:
+      - in: "body"
+        name: "body"
+        description: "employee to be registered"
+        required: true
+        schema:
+          $ref: "#/definitions/employeeRequest"
+      produces:
+        - "application/json"
+      consumes: 
+        - "application/json"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/employeeResponse"
+  /employee/{id}:
+    get:
+      tags:
+      - "employee"
+      summary: "find employee by id"
+      description: |+
+        returns a single employee
+        \
+        READ authority
+      produces:
+        - "application/json"
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "employee's id to find"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/employeeResponse"
+        404:
+          description: "no employee found with this id"
+    delete:
+      tags:
+      - "employee"
+      summary: "delete employee by id"
+      description: |+
+        delete employee by id
+        \
+        WRITE authority
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "employee's id to be deleted"
+        required: true
+        type: "integer"
+      responses:
+        200:
+          description: "successful operation"
+        204:
+          description: "no employee found with this id"
+    patch:
+      tags:
+      - "employee"
+      summary: "update employee by id"
+      description: |+
+        update employee by id
+        \
+        WRITE authority
+      parameters:
+      - name: "id"
+        in: "path"
+        description: "employee's id to be deleted"
+        required: true
+        type: "integer"
+      - in: "body"
+        name: "body"
+        description: "employee's data to be updated"
+        required: true
+        schema:
+          $ref: "#/definitions/employeeRequest"
+      responses:
+        200:
+          description: "successful operation"
+          schema:
+            $ref: "#/definitions/employeeResponse"
+definitions:
+  employeeResponseList:
+    type: array
+    items:
+       $ref: "#/definitions/employeeResponse"
+  employeeResponse:
+    type: "object"
+    properties:
+      id:
+        type: "integer"
+        description: |+
+          unique key
+        example: 1
+      fullName:
+        type: "string"
+        example: "gabriel s rado"
+        description: |+
+          firstName + middleInitial + lastName
+      dateOfBirth:
+        type: "string"
+        format: "date"
+        example: "1993-04-22"
+      dateOfEmployment:
+        type: "string"
+        format: "date"
+        example: "2018-03-01"
+  employeeRequest:
+    type: "object"
+    properties:
+      firstName:
+        type: string
+        example: gabriel
+      middleInitial:
+        type: string
+        minLength: 1
+        maxLength: 1
+        example: s
+      lastName:
+        type: string
+        example: rado
+      dateOfBirth:
+        type: "string"
+        format: "date"
+        example: "1993-04-22"
+      dateOfEmployment:
+        type: "string"
+        format: "date"
+        example: "2018-03-01"
+    
