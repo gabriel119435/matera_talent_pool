@@ -1,0 +1,61 @@
+# PORT
+server:
+  port: 8081
+
+# DATASOURCE
+spring:
+  # defines database connection properties
+  datasource:
+    url: jdbc:postgresql://localhost:5432/myDataBase
+    username: postgres
+    password: postgres
+    validationQuery: select now()
+    hikari:
+      maximumPoolSize: 1
+  jpa:
+   #used to validate table regarding Java entities https://stackoverflow.com/questions/438146/what-are-the-possible-values-of-the-hibernate-hbm2ddl-auto-configuration-and-wh
+    hibernate:
+     ddl-auto: create-drop
+    # used to avoid https://stackoverflow.com/questions/49110818/method-org-postgresql-jdbc-pgconnection-createclob-is-not-yet-implemented
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect 
+        jdbc:
+          lob:
+            non_contextual_creation: true
+
+# LOGGING
+logging:
+  path: C:\temp\matera_talent_pool-log
+  # based on https://logback.qos.ch/manual/layouts.html#conversionWord
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%-5level{5}] [%-70class{70}.%-30method{30}] %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%-5level{5}] [%-70class{70}.%-30method{30}] %msg%n"
+  level:
+    # generic level that overrides every other configuration
+    root: info
+    # specific levels to debug only some functionalities
+    org:
+      apache: info
+      springframework:
+        web: info
+        jdbc: info
+        # log auth data
+        security: info
+        # log queries with values (degug and trace) https://stackoverflow.com/questions/30118683/how-to-log-sql-statements-in-spring-boot
+        hibernate:
+          SQL: info
+          type: info
+
+# CUSTOM SECURITY used on config/SecurityConfig.java
+custom:
+  users:
+    - username: admin
+      password: admin
+      authorities:
+        - WRITE
+        - READ
+    - username: user
+      password: user
+      authorities:
+        - READ

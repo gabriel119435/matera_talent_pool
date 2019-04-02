@@ -1,0 +1,3 @@
+INSERT INTO employee (date_of_birth, date_of_employment, first_name, last_name, middle_initial, status) VALUES ('1991-04-11', '2023-09-21', 'John','Doe', 'A', 0);
+INSERT INTO employee (date_of_birth, date_of_employment, first_name, last_name, middle_initial, status) VALUES ('1992-08-21', '2022-05-14', 'Jane','Doe', 'B', 0);
+INSERT INTO employee (date_of_birth, date_of_employment, first_name, last_name, middle_initial, status) VALUES ('1993-12-31', '2021-01-07', 'James','Smith', 'C', 0);

@@ -53,6 +53,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/employeeResponse"
+        400:
+          description: "bad request. Some detailed info will be attached"
   /employee/{id}:
     get:
       tags:
@@ -92,10 +94,8 @@ paths:
         required: true
         type: "integer"
       responses:
-        200:
-          description: "successful operation"
         204:
-          description: "no employee found with this id"
+          description: "request sucefully processed with no content to return"
     patch:
       tags:
       - "employee"
@@ -121,6 +121,8 @@ paths:
           description: "successful operation"
           schema:
             $ref: "#/definitions/employeeResponse"
+        400:
+          description: "bad request. Some detailed info will be attached"
 definitions:
   employeeResponseList:
     type: array
