@@ -1,12 +1,28 @@
-# matera talent pool
-Repository for a sample code project
+# Matera Talent Pool
+Repository for a sample code project including a simple CRUD through REST APIs
 
-## minimum requirements
+## Minimum requirements
  - [Java 8](https://www.java.com/en/)
- - [PostgreSQL 10](https://www.postgresql.org/download/)
+ - [Docker](https://www.docker.com)
  - [Maven 3.5.4](https://maven.apache.org/download.cgi)
 
-## configuration
+## Docker
+At `docker/`, run 
+```
+docker build -t simple_psql .
+```
+This will create an image called simple_psql based on `Dockerfile`. Running `docker images` should return something like
+```
+REPOSITORY          TAG                 IMAGE ID            CREATED             SIZE
+simple_psql         latest              d0f10a1527cf        8 seconds ago       230MB
+```
+Running 
+```
+docker run --name container_name -d -p 5432:5432 -e POSTGRES_PASSWORD=postgres simple_psql
+```
+creates a container named `container_name` based on `simple_psql` image. This container is ready to be used as our database.
+
+## Configuration
 All configuration is at `src/main/resources/application.yml`:
  ```
 # PORT
@@ -23,7 +39,7 @@ spring:
     username: postgres
     password: postgres
  ```
-This should be altered according to your PostgreSQL installation. If you don't want to change this settings, make sure you installed PostgreSQL with default settings, `postgres` password and a database called `myDataBase`.
+`localhost:5432` should be match your container's ip and port
 ```
 hibernate:
   ddl-auto: create-drop
@@ -55,13 +71,13 @@ Here you can determine which users will have access to different authorities. `u
 
 All other values should be left unaltered.
 
-## initial load
+## Initial load
 When `ddl-auto` is set to `create-drop` or `create`, the application will use `src\main\resources\import.sql` script to generate a initial load. The user can add as many lines as he wants following this pattern:
 ```
 INSERT INTO employee (date_of_birth, date_of_employment, first_name, last_name, middle_initial, status) VALUES ('1991-04-11', '2023-09-21', 'John','Doe', 'A', 0);
 ```
 
-## build
+## Build
 Running `mvn clean package -DskipTests` at root directory will build just the necessary files to start the application, creating a `outputDirectory` with two files:
 - `matera_talent_pool.jar`
 - `application.yml`
@@ -75,14 +91,15 @@ To run the application, go to `outputDirectory` and run `java -jar matera_talent
 2019-04-02 07:39:11 [INFO ] [org.springframework.boot.StartupInfoLogger                            .logStarted                    ] Started Application in 6.203 seconds (JVM running for 6.704)
 ```
 
-## API documentation
+## API Documentation
 Api documentation can be retrieved in two ways:
 1. [Swagger Editor](https://editor.swagger.io/), online editor to vizualize REST calls
 
 To use swagger, import file `doc\swagger\employeeAPIs.yaml` or paste its content into the black left text box on swagger editor as shown below:
-<img src="https://i.imgur.com/0ftUrjw.png">
+
+![](https://i.imgur.com/0ftUrjw.png)
 
 2. [Postman](https://www.getpostman.com/), desktop application to make REST calls
 After installing Postman, go to File -> Import and select `\doc\postman\matera_talent_pool.postman_collection.json`:
 
-<img src="https://i.imgur.com/Cant7x3.png">
+![](https://i.imgur.com/Cant7x3.png)

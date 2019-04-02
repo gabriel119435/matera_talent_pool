@@ -6,7 +6,7 @@ server:
 spring:
   # defines database connection properties
   datasource:
-    url: jdbc:postgresql://localhost:5432/myDataBase
+    url: jdbc:postgresql://192.168.99.100:5432/myDataBase
     username: postgres
     password: postgres
     validationQuery: select now()
