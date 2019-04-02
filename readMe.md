@@ -2,8 +2,8 @@
 Repository for a sample code project
 
 ## minimum requirements
- - [Java 8]([https://www.java.com/en/](https://www.java.com/en/))
- - [PostgreSQL 10]([https://www.postgresql.org/download/](https://www.postgresql.org/download/))
+ - [Java 8](https://www.java.com/en/)
+ - [PostgreSQL 10](https://www.postgresql.org/download/)
  - [Maven 3.5.4](https://maven.apache.org/download.cgi)
 
 ## configuration
