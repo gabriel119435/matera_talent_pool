@@ -6,7 +6,7 @@ server:
 spring:
   # defines database connection properties
   datasource:
-    url: jdbc:postgresql://192.168.99.100:5432/myDataBase
+    url: jdbc:postgresql://localhost:5432/mydatabase
     username: postgres
     password: postgres
     validationQuery: select now()
@@ -26,7 +26,7 @@ spring:
 
 # LOGGING
 logging:
-  path: C:\temp\matera_talent_pool-log
+  path: matera_talent_pool-log
   # based on https://logback.qos.ch/manual/layouts.html#conversionWord
   pattern:
     console: "%d{yyyy-MM-dd HH:mm:ss} [%-5level{5}] [%-70class{70}.%-30method{30}] %msg%n"

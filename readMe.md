@@ -48,9 +48,9 @@ This will drop all related tables and create new ones on every startup. To tests
  ```
 # LOGGING
 logging:
-  path: C:\temp\matera_talent_pool-log
+  path: matera_talent_pool-log
  ```
-You should change this path to where log files will be generated. If you're in Linux, use `/` instead of Windows default directory separator `\` as shown above.
+You should change this path to where log files will be generated
 ```
 # CUSTOM SECURITY used on config/SecurityConfig.java
 custom:
